@@ -1,0 +1,28 @@
+sudo: false
+language: go
+go:
+  - master                        # the latest version of Go
+git:
+  depth: 1
+install:
+  - go get -v github.com/gohugoio/hugo  # the latest version of Hugo
+  - rm -rf public || exit 0
+  - export PATH=$HOME/_bin:$PATH
+script:
+  - hugo version  
+  - hugo          # building command
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: "/public"
+  target_branch: master
+  repo: senze/senze.github.io     # <username>/<username>.github.io
+  email: senzezheng342@gmail.com  # <github-email>
+  name: senze                     # <github-name>
+  # fqdn: <custom-domain-if-needed>
+  on:
+    branch: source
+notifications:
+  email:
+    on_success: never
