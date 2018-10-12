@@ -1,7 +1,5 @@
 sudo: false
 language: go
-go:
-  - master                        # the latest version of Go
 git:
   depth: 1
 install:
